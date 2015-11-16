@@ -1,0 +1,4 @@
+john:
+  name: John
+  posts_count: 10
+  created_at: <%= Date.civil(2015, 10, 1) %>

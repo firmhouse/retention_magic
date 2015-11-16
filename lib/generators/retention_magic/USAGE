@@ -1,0 +1,8 @@
+Description:
+    RetentionMagic install generator
+
+Example:
+    rails generate retention_magic
+
+    This will create config/initializers/retention_magic.rb with sample
+    configuration options for using RetentionMagic.

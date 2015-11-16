@@ -1,0 +1,89 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <h1>How is your app doing?</h1>
+      <p class="lead">This page shows how your app is doing in cohorts of monthly signups. Analyzing
+        your app's usage in monthly cohorts helps you pinpoint important changes
+        to your app and or marketing strategy.</p>
+      <p class="lead">The <b>Activation</b> graph tells you how your app
+        is growing and which cohort performed the most subsequent actions in your app.<br>The
+        <b>Retention</b> graph shows you how many users stay active in your app in the months
+        after signing up.</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-6 col-sm-3">
+      <div class="panel panel-default">
+        <div class="panel-heading">Users</div>
+        <div class="panel-body">
+          <%= @user_class.count %>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-6 col-sm-3">
+      <div class="panel panel-default">
+        <div class="panel-heading">Cohorts</div>
+        <div class="panel-body">
+          <%= @number_of_months %>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-6 col-sm-3">
+      <div class="panel panel-default">
+        <div class="panel-heading">First Cohort</div>
+        <div class="panel-body">
+          <%= @first_cohort %>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-6 col-sm-3">
+      <div class="panel panel-default">
+        <div class="panel-heading">Current Cohort</div>
+        <div class="panel-body">
+          <%= @current_cohort %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Activation</h3>
+      </div>
+      <div class="panel-body">
+
+    <%= area_chart(
+      [
+        {
+          name: ">= 5 interactions",
+          data: @graphs[:activation][:five_activations]
+        },
+        {
+          name: "One interaction",
+          data: @graphs[:activation][:one_activation]
+        },
+        {
+          name: "Signup without interacting",
+          data: @graphs[:activation][:signup_without_activation]
+        }], library: { legend: { position: "bottom" } } )%>
+    </div>
+  </div>
+  </div>
+  <div class="col-xs-12">
+
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">Retention</h3>
+    </div>
+    <div class="panel-body">
+      <%= area_chart(@graphs[:retention].map { |k,v| {name: k, data: v}}, library: { legend: { position: "bottom" } } ) %>
+
+    </div>
+  </div>
+  </div>
+
+    </div>
+  </div>
+</div>

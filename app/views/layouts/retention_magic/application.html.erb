@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>RetentionMagic</title>
+  <%= stylesheet_link_tag    "retention_magic/application", media: "all" %>
+  <%= javascript_include_tag "retention_magic/application" %>
+
+  <%= javascript_include_tag "//www.google.com/jsapi", "chartkick" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+<%= yield %>
+
+</body>
+</html>
