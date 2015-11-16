@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
   s.version     = RetentionMagic::VERSION
   s.authors     = ["Michiel Sikkes"]
   s.email       = ["michiel@firmhouse.com"]
-  s.homepage    = "https://github.com/firmhouse/retentionmagic"
+  s.homepage    = "https://github.com/firmhouse/retention_magic"
   s.summary     = "Analyze cohorts and generate retention graphs for your app."
   s.description = <<-EOF
     RetentionMagic is a drop-in gem for instantly generating insightful graphs
