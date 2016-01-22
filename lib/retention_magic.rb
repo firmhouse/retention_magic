@@ -6,6 +6,7 @@ module RetentionMagic
   end
   mattr_accessor :activation_counter_columns do
     []
+  end
   mattr_accessor :retention_models do
     []
   end
