@@ -24,15 +24,7 @@
       <div class="panel panel-default">
         <div class="panel-heading">Cohorts</div>
         <div class="panel-body">
-          <%= @number_of_months %>
-        </div>
-      </div>
-    </div>
-    <div class="col-xs-6 col-sm-3">
-      <div class="panel panel-default">
-        <div class="panel-heading">First Cohort</div>
-        <div class="panel-body">
-          <%= @first_cohort %>
+          <%= @number_of_weeks %> weeks
         </div>
       </div>
     </div>
@@ -40,7 +32,7 @@
       <div class="panel panel-default">
         <div class="panel-heading">Current Cohort</div>
         <div class="panel-body">
-          <%= @current_cohort %>
+          <%= @current_cohort_label %>
         </div>
       </div>
     </div>
@@ -61,7 +53,7 @@
           data: @graphs[:activation][:five_activations]
         },
         {
-          name: "One interaction",
+          name: "<= 5 interactions",
           data: @graphs[:activation][:one_activation]
         },
         {
@@ -78,7 +70,7 @@
       <h3 class="panel-title">Retention</h3>
     </div>
     <div class="panel-body">
-      <%= area_chart(@graphs[:retention].map { |k,v| {name: k, data: v}}, library: { legend: { position: "bottom" } } ) %>
+      <%= area_chart(@graphs[:retention].map { |k,v| {name: k, data: v}}, stacked: true, library: { bar: { groupWidth: "98%" }, legend: { position: "bottom" } } ) %>
 
     </div>
   </div>
