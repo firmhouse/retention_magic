@@ -1,3 +1,3 @@
 module RetentionMagic
-  VERSION = "0.1beta2"
+  VERSION = "0.1beta3"
 end
