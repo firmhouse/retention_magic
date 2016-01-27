@@ -33,10 +33,28 @@ module RetentionMagic
         cohort_start_end = (cohort_start + 1.week).beginning_of_week
 
         cohort_users = @user_class.where(created_at: cohort_start..cohort_start_end)
+        number_of_cohort_users = cohort_users.count
 
-        @graphs[:activation][:signup_without_activation][cohort_start] = cohort_users.where("#{activation_fields_for_query} = 0").count
-        @graphs[:activation][:one_activation][cohort_start] = cohort_users.where("#{activation_fields_for_query} = 1").count
-        @graphs[:activation][:five_activations][cohort_start] = cohort_users.where("#{activation_fields_for_query} >= 5").count
+        if number_of_cohort_users == 0
+          signups_without_activation = 0
+          one_activation = 0
+          five_activations = 0
+        else
+          signups_without_activation = cohort_users.where("#{activation_fields_for_query} = 0").count
+          one_activation = cohort_users.where("#{activation_fields_for_query} >= 1 AND #{activation_fields_for_query} < 5").count
+          five_activations = cohort_users.where("#{activation_fields_for_query} >= 5").count
+        end
+
+        if number_of_cohort_users > 0
+          @graphs[:activation][:one_activation][cohort_start] = (one_activation.to_f / number_of_cohort_users.to_f) * 100.0
+          @graphs[:activation][:five_activations][cohort_start] = (five_activations.to_f / number_of_cohort_users.to_f) * 100.0
+          @graphs[:activation][:signup_without_activation][cohort_start] = (signups_without_activation.to_f / number_of_cohort_users.to_f) * 100.0
+        else
+          @graphs[:activation][:one_activation][cohort_start] = 0
+          @graphs[:activation][:five_activations][cohort_start] = 0
+          @graphs[:activation][:signup_without_activation][cohort_start] = 0
+        end
+
 
         cohort_start_label = cohort_start.strftime("w%U %Y")
         @graphs[:retention][cohort_start_label] = {}
